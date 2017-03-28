@@ -1,15 +1,10 @@
 package com.example.denis.guitarapp.api;
 
-import android.support.annotation.NonNull;
-
 import com.example.denis.guitarapp.model.Artist;
 import com.example.denis.guitarapp.model.Song;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class API {
     public static List<Artist> fetchArtists(int count) {
