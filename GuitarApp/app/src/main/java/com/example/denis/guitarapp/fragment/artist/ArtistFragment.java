@@ -25,7 +25,7 @@ public class ArtistFragment extends Fragment implements ArtistListInteractionLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        artists = API.fetchArtists(20);
+        artists = API.fetchArtists();
     }
 
     @Override
