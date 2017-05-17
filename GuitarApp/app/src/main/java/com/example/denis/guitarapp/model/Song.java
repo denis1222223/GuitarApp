@@ -3,11 +3,14 @@ package com.example.denis.guitarapp.model;
 import java.util.Date;
 
 public class Song {
-    public final int id;
-    public final String name;
-    public final Date date;
-    public final int likesCount;
-    public final int artistId;
+    public int id;
+    public String name;
+    public Date date;
+    public int likesCount;
+    public int artistId;
+    public String text;
+
+    public Song() { }
 
     public Song(int id, String name, int artistId) {
         this.id = id;
@@ -15,6 +18,7 @@ public class Song {
         this.date = new Date();
         this.likesCount = 0;
         this.artistId = artistId;
+        this.text = "";
     }
 
     @Override

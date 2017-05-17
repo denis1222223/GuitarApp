@@ -29,6 +29,9 @@ public class Song implements Serializable {
     @Column(name = "ArtistId")
     private Integer artistId;
 
+    @Column(name = "Text")
+    private String text;
+
     public Song() { }
 
     public Song(int id, String name, int artistId) {
@@ -37,6 +40,7 @@ public class Song implements Serializable {
         this.date = new Date();
         this.likesCount = 0;
         this.artistId = artistId;
+        this.text = "";
     }
 
     public Integer getId() {
@@ -77,6 +81,14 @@ public class Song implements Serializable {
 
     public void setArtistId(Integer artistId) {
         this.artistId = artistId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override

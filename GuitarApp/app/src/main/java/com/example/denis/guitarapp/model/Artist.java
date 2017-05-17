@@ -1,8 +1,10 @@
 package com.example.denis.guitarapp.model;
 
 public class Artist {
-    public final int id;
-    public final String name;
+    public int id;
+    public String name;
+
+    public Artist() { }
 
     public Artist(int id, String name) {
         this.id = id;
