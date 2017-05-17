@@ -1,11 +1,11 @@
 package com.example.service;
 
-import com.example.domain.Song;
 import java.util.List;
 
-public interface DataService {
-    public boolean create(Song song);
-    public Song get(Integer id);
-    public List<Song> getAll();
+public interface DataService<T> {
+    public boolean create(T entity);
+    public List<T> getAll();
+    public T get(Integer id);
+    public boolean update(T entity);
     public boolean delete(Integer id);
 }

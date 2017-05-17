@@ -2,26 +2,21 @@ package com.example.controller;
 
 import com.example.domain.Song;
 import com.example.service.DataService;
-import com.example.service.DataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-
-import java.util.Date;
 import java.util.List;
 
 @RestController
 public class SongController {
 
-    private final DataService dataService;
+    private final DataService<Song> dataService;
 
-    @Autowired
-    public SongController(DataService dataService) {
+    public SongController(DataService<Song> dataService) {
         this.dataService = dataService;
     }
 
@@ -32,7 +27,7 @@ public class SongController {
 
     @RequestMapping(value = "song/{id}", method = GET)
     public Song getSong(@PathVariable Integer id) {
-        return dataService.get(id);
+        return (Song)dataService.get(id);
     }
 
     @RequestMapping(value = "song/{id}", method = DELETE)
@@ -46,8 +41,8 @@ public class SongController {
         dataService.create(song);
     }
 
-//    @RequestMapping(value="song", method=PUT)
-//    public void updateSong(@RequestBody Song song) {
-//        songService.update(song);
-//    }
+    @RequestMapping(value="song", method=PUT)
+    public void updateSong(@RequestBody Song song) {
+        dataService.update(song);
+    }
 }

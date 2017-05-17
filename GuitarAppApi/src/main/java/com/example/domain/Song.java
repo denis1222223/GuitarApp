@@ -29,9 +29,7 @@ public class Song implements Serializable {
     @Column(name = "ArtistId")
     private Integer artistId;
 
-    public Song(){
-
-    }
+    public Song() { }
 
     public Song(int id, String name, int artistId) {
         this.id = id;

@@ -7,34 +7,38 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class DataServiceImpl implements DataService {
+public class DataServiceImpl<T> implements DataService<T> {
 
     private final DataDao dataDao;
 
     @Autowired
-    public DataServiceImpl(DataDao dataDao) {
+    public DataServiceImpl(DataDao<T> dataDao) {
         this.dataDao = dataDao;
     }
 
     @Override
-    public boolean create(Song song) {
-        return dataDao.addEntity(song);
+    public boolean create(T song) {
+        return dataDao.add(song);
     }
 
     @Override
-    public Song get(Integer id) {
-        return dataDao.getEntityById(id);
+    public boolean update(T song) {
+        return dataDao.update(song);
     }
 
     @Override
-    public List<Song> getAll() {
-        return dataDao.getEntityList();
+    public T get(Integer id) {
+        return (T)dataDao.get(id);
+    }
+
+    @Override
+    public List<T> getAll() {
+        return dataDao.getAll();
     }
 
     @Override
     public boolean delete(Integer id) {
-        return dataDao.deleteEntity(id);
+        return dataDao.delete(id);
     }
 
 }

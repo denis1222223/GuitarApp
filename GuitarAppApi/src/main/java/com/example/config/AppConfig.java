@@ -1,5 +1,11 @@
 package com.example.config;
 
+import com.example.dao.DataDao;
+import com.example.dao.DataDaoHibernateImpl;
+import com.example.domain.Artist;
+import com.example.domain.Song;
+import com.example.service.DataService;
+import com.example.service.DataServiceImpl;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +17,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
@@ -20,7 +25,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.example")
 @PropertySource(value = "classpath:application.properties")
 @EnableWebMvc
-public class AppConfig extends WebMvcConfigurerAdapter {
+public class AppConfig {
     @Autowired
     private Environment env;
 
@@ -34,8 +39,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-    @Bean
-    public SessionFactory sessionFactory() {
+    private SessionFactory sessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource());
         localSessionFactoryBean.setPackagesToScan("com.example");
@@ -55,6 +59,25 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         properties.put("hibernate.id.new_generator_mappings", env.getProperty("hibernate.id.new_generator_mappings"));
 
         return properties;
+    }
+
+    @Bean
+    public DataDao<Song> songDao() {
+        return new DataDaoHibernateImpl<Song>(this.sessionFactory(), Song.class);
+    }
+
+    @Bean
+    public DataDao<Artist> artistDao() {
+        return new DataDaoHibernateImpl<Artist>(this.sessionFactory(), Artist.class);
+    }
+
+    @Bean
+    public DataService<Song> songService() {
+        return new DataServiceImpl<Song>(this.songDao());
+    }
+    @Bean
+    public DataService<Artist> artistService() {
+        return new DataServiceImpl<Artist>(this.artistDao());
     }
 
     @Bean
