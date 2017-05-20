@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.denis.guitarapp.api.ArtistApiService;
+import com.example.denis.guitarapp.api.RequestQueueSingleton;
+import com.example.denis.guitarapp.api.SongApiService;
 import com.example.denis.guitarapp.fragment.tab.TabFragment;
 import com.example.denis.guitarapp.fragment.artist.ArtistFragment;
 
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeAllSingletons();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,5 +79,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initializeAllSingletons(){
+        new RequestQueueSingleton(this);
+        new ArtistApiService(this);
+        new SongApiService(this);
     }
 }

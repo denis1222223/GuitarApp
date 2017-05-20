@@ -1,4 +1,4 @@
-package com.example.denis.guitarapp.fragment.artist;
+package com.example.denis.guitarapp.fragment.song;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,33 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.denis.guitarapp.R;
-import com.example.denis.guitarapp.model.Artist;
+import com.example.denis.guitarapp.fragment.song.filter.SongFilterRecent;
 
-public class ArtistFragment extends Fragment implements ArtistListInteractionListener {
-
-    public ArtistFragment() { }
-
+public class SongFragmentRecent extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.artist_list, container, false);
-
+        View view = inflater.inflate(R.layout.song_list_recent, container, false);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView recyclerView = (RecyclerView)view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-            recyclerView.setAdapter(new ArtistRecyclerViewAdapter(this));
+            recyclerView.setAdapter(new SongRecyclerViewAdapter(new SongFilterRecent()));
         }
         return view;
     }
-
-    @Override
-    public void onListFragmentClick(Artist artist) {
-        Toast.makeText(this.getContext(), artist.toString(), Toast.LENGTH_SHORT).show();
-    }
 }
-

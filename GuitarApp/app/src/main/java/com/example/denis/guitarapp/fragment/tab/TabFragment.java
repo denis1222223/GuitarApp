@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.denis.guitarapp.R;
-import com.example.denis.guitarapp.fragment.song.SongFragment;
+import com.example.denis.guitarapp.fragment.song.SongFragmentPopular;
+import com.example.denis.guitarapp.fragment.song.SongFragmentRecent;
 
 public class TabFragment extends Fragment {
 
@@ -20,8 +21,8 @@ public class TabFragment extends Fragment {
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new SongFragment(), getResources().getString(R.string.tab_title_recent));
-        adapter.addFragment(new SongFragment(), getResources().getString(R.string.tab_title_popular));
+        adapter.addFragment(new SongFragmentRecent(), getResources().getString(R.string.tab_title_recent));
+        adapter.addFragment(new SongFragmentPopular(), getResources().getString(R.string.tab_title_popular));
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
